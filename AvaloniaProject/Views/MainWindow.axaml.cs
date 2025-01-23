@@ -6,6 +6,7 @@ namespace AvaloniaProject.Views
     {
         public MainWindow()
         {
+
             InitializeComponent();
         }
     }
