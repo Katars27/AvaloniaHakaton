@@ -10,7 +10,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace AvaloniaApp.ViewModels
+namespace AvaloniaProject.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
