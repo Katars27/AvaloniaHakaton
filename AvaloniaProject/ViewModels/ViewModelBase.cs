@@ -5,5 +5,6 @@ namespace AvaloniaProject.ViewModels
     public class ViewModelBase : ObservableObject
     {
 
+
     }
 }
