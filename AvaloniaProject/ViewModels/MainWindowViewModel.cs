@@ -20,6 +20,7 @@ namespace AvaloniaApp.ViewModels
         public MainWindowViewModel()
         {
             CompressCommand = new RelayCommand(_ => Compress());
+            DecompressCommand = new RelayCommand(_ => Decompress());
         }
 
         public string StatusMessage { get; set; }
@@ -87,6 +88,66 @@ namespace AvaloniaApp.ViewModels
                 StatusMessage = $"Ошибка архивации: {ex.Message}";
             }
         }
+        public async void Decompress()
+        {
+            try
+            {
+                // Получаем главное окно приложения
+                var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+                if (mainWindow == null)
+                {
+                    StatusMessage = "Главное окно не найдено.";
+                    return;
+                }
 
+                // Выбор архива
+                var openFileDialog = new OpenFileDialog
+                {
+                    Title = "Выберите архив для распаковки",
+                    Filters = new List<FileDialogFilter>
+             {
+                 new FileDialogFilter { Name = "7-Zip Archive", Extensions = new List<string> { "7z" } }
+             }
+                };
+                var archivePaths = await openFileDialog.ShowAsync(mainWindow);
+                if (archivePaths == null || archivePaths.Length == 0)
+                {
+                    StatusMessage = "Архив для распаковки не выбран.";
+                    return;
+                }
+                var archivePath = archivePaths[0];
+
+                // Выбор папки для распаковки
+                var folderDialog = new OpenFolderDialog { Title = "Выберите папку для распаковки" };
+                var extractPath = await folderDialog.ShowAsync(mainWindow);
+
+                if (string.IsNullOrEmpty(extractPath))
+                {
+                    StatusMessage = "Папка для распаковки не выбрана.";
+                    return;
+                }
+
+                // Установка пути к библиотеке 7z.dll
+                var dllPath = Path.Combine(AppContext.BaseDirectory, "NativeBinaries", "7z.dll");
+                if (!File.Exists(dllPath))
+                {
+                    StatusMessage = $"Библиотека {dllPath} не найдена!";
+                    return;
+                }
+                SevenZipBase.SetLibraryPath(dllPath);
+
+                // Распаковка архива
+                using (var extractor = new SevenZipExtractor(archivePath))
+                {
+                    extractor.ExtractArchive(extractPath);
+                }
+
+                StatusMessage = $"Архив {archivePath} успешно распакован в {extractPath}";
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Ошибка распаковки: {ex.Message}";
+            }
+        }
     }
 }
