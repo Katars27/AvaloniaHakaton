@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
+	<RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
@@ -15,6 +16,7 @@
 		<Compile Remove="NativeBinaries\Новая папка\**" />
 		<EmbeddedResource Remove="NativeBinaries\Новая папка\**" />
 		<None Remove="NativeBinaries\Новая папка\**" />
+		<None Remove="Assets\logo.ico" />
 		<None Update="NativeBinaries\7z.dll">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>

@@ -1,81 +1,47 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:AvaloniaProject.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="AvaloniaProject.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Width="600"
-        Height="400"
-        Title="Современный Архиватор"
-		TransparencyLevelHint="AcrylicBlur"
-        Background="{DynamicResource SystemControlAcrylicWindowBrush}">
+        Icon="/Assets/logo.ico"
+        Width="800"
+        Height="450"
+        Title="Архиватор файлов"
+        WindowStartupLocation="CenterScreen"
+        TransparencyLevelHint="AcrylicBlur">
+
+	<Window.RenderTransform>
+		<ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+	</Window.RenderTransform>
+	
 	<Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
 
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
-		<TextBlock Text="Архиватор"
-				  FontSize="32"
-				  FontWeight="Bold"
-				  HorizontalAlignment="Center"
-				  Foreground="White"
-				  Margin="10,20,0,10"
-				  Grid.Row="0"/>
+		<TextBlock Text="Современный Архиватор"
+                   HorizontalAlignment="Center"
+                   FontSize="32"
+                   FontWeight="Bold"
+                   Margin="0,20,0,20"
+                   Foreground="#42313A" />
 
 		<StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
-
-			<Button Content="Архивировать папку"
-                    Width="250"
-                    Height="50"
-                    Background="#4CAF50"
-                    Foreground="White"
-                    CornerRadius="10"
-                    Command="{Binding CompressCommand}">
-				<Button.Styles>
-					<Style Selector="Button:hover">
-						<Setter Property="Background" Value="#45A049"/>
-					</Style>
-					<Style Selector="Button:pressed">
-						<Setter Property="Background" Value="#388E3C"/>
-					</Style>
-				</Button.Styles>
-			</Button>
-
-			<Button Content="Распаковать архив"
-                    Width="250"
-                    Height="50"
-                    Background="#2196F3"
-                    Foreground="White"
-                    CornerRadius="10"
-                    Command="{Binding DecompressCommand}">
-				<Button.Styles>
-					<Style Selector="Button:hover">
-						<Setter Property="Background" Value="#45A049"/>
-					</Style>
-					<Style Selector="Button:pressed">
-						<Setter Property="Background" Value="#388E3C"/>
-					</Style>
-				</Button.Styles>
-
-			</Button>
+			<Button Content="Архивировать файлы" Command="{Binding CompressCommand}" Width="250" />
+			<Button Content="Распаковать архив" Command="{Binding DecompressCommand}" Width="250" />
 		</StackPanel>
 
-		<TextBlock Text="{Binding StatusMessage}"
-					   Name="StatusText"
-                       FontSize="14"
-                       Foreground="White"
-                       TextWrapping="Wrap"
-                       HorizontalAlignment="Center"/>
-
+		<TextBlock Text="Программное обеспечение для управления архивами"
+                   HorizontalAlignment="Center"
+                   FontSize="14"
+                   Margin="0,20,0,10"
+                   Foreground="#42313A"
+                   Grid.Row="2" />
 	</Grid>
-
 </Window>

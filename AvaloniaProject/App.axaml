@@ -1,15 +1,57 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="AvaloniaProject.App"
-             xmlns:local="using:AvaloniaProject"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+	<Application.Resources>
+		<FontFamily x:Key="MainFont">avares://AvaloniaProject/Assets/Roboto-Regular.ttf#Roboto</FontFamily>
+	</Application.Resources>
 
-    <Application.DataTemplates>
-        <local:ViewLocator/>
-    </Application.DataTemplates>
-  
-    <Application.Styles>
-        <FluentTheme />
-    </Application.Styles>
+	<Application.Styles>
+		<FluentTheme />
+
+		<Style Selector="TextBlock">
+			<Setter Property="FontSize" Value="20" />
+			<Setter Property="FontWeight" Value="SemiBold" />
+			<Setter Property="Foreground" Value="#42313A" />
+			<Setter Property="Margin" Value="10,5" />
+		</Style>
+
+		<Style Selector="Button">
+			<Setter Property="Background" Value="#9F4636" />
+			<Setter Property="Foreground" Value="White" />
+			<Setter Property="BorderBrush" Value="#6C2D2C" />
+			<Setter Property="BorderThickness" Value="2" />
+			<Setter Property="CornerRadius" Value="20" />
+			<Setter Property="Padding" Value="15,10" />
+			<Setter Property="FontSize" Value="18" />
+			<Setter Property="FontWeight" Value="Bold" />
+			<Setter Property="HorizontalAlignment" Value="Center" />
+			<Setter Property="Transitions">
+				<Transitions>
+					<DoubleTransition Property="Opacity" Duration="0:0:0.2" />
+				</Transitions>
+			</Setter>
+		</Style>
+
+		<Style Selector="Button:hover">
+			<Setter Property="Background">
+				<Setter.Value>
+					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+						<GradientStop Color="#6C2D2C" Offset="0" />
+						<GradientStop Color="#9F4636" Offset="1" />
+					</LinearGradientBrush>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="BorderBrush" Value="#42313A" />
+		</Style>
+
+		<Style Selector="Button:pressed">
+			<Setter Property="Background" Value="#6C2D2C" />
+			<Setter Property="BorderBrush" Value="#9F4636" />
+		</Style>
+
+		<Style Selector="Window">
+			<Setter Property="Background" Value="#F1DCC9" />
+		</Style>
+	</Application.Styles>
 </Application>
