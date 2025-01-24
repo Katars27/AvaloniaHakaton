@@ -15,7 +15,7 @@ namespace AvaloniaProject.Views
             DataContext = new MainWindowViewModel();
 
             this.Opacity = 0; // Прозрачность
-            this.RenderTransform = new ScaleTransform(0.5, 0.5); 
+            this.RenderTransform = new ScaleTransform(0.7, 0.7); 
 
             // Анимация появления
             var timer = new DispatcherTimer
